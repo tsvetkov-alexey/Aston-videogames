@@ -5,7 +5,7 @@ export const GameCardSkeleton: React.FC = () => (
   <div className="skeleton">
     <ContentLoader
       speed={2}
-      width={520}
+      width={500}
       height={370}
       viewBox="0 0 520 370"
       backgroundColor="#e6e6e6"
