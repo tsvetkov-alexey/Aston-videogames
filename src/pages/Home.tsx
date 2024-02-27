@@ -1,3 +1,4 @@
+import { ErrorBlock } from '../components/ErrorBlock';
 import { GameCard } from '../components/GameCard';
 import { GameCardSkeleton } from '../components/GameCardSkeleton';
 import { Header } from '../components/Header';
@@ -25,16 +26,7 @@ export const Home: React.FC = () => {
       <div className="main-block">
         <Search />
         <div className="cards">
-          {status === 'error' ? (
-            <div className="error-info" style={{ width: '225%', textAlign: 'center' }}>
-              <h2>We're really sorry 😢</h2>
-              <p>But it seems like there's have been an error with server. Try later</p>
-            </div>
-          ) : status === 'loading' ? (
-            skeletons
-          ) : (
-            games
-          )}
+          {status === 'error' ? <ErrorBlock /> : status === 'loading' ? skeletons : games}
         </div>
       </div>
     </>

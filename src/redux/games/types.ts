@@ -5,6 +5,7 @@ export type Game = {
   releaseDate: string;
   genre: string;
   description: string;
+  ageRate: number;
 };
 
 export enum Status {

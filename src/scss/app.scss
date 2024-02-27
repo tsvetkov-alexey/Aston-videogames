@@ -56,6 +56,8 @@ header {
 
 .main-block {
   margin: 50px 10%;
+  position: relative;
+  min-height: 50vh;
 
   .search {
     width: 25%;
@@ -100,6 +102,12 @@ header {
       }
     }
 
+    .error-info {
+      width: 225%;
+      text-align: center;
+      padding: 100px 10px;
+    }
+
     .card-block {
       width: 500px;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
@@ -115,10 +123,12 @@ header {
 
       .main-image {
         position: relative;
+
         img {
           display: block;
           margin: 0 auto;
           max-width: 400px;
+          max-height: 225px;
           border-radius: 25px;
         }
         .like {
