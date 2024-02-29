@@ -1,8 +1,9 @@
 import like from '../assets/svg/like.svg';
 import { Game } from '../redux/games/types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export const GameCard: React.FC<Game> = ({ title, imageUrl, releaseDate, genre }) => {
+export const GameCard: React.FC<Game> = ({ id, title, imageUrl, releaseDate, genre }) => {
   return (
     <div className="card-block">
       <div className="main-image">
@@ -17,7 +18,9 @@ export const GameCard: React.FC<Game> = ({ title, imageUrl, releaseDate, genre }
           <li>Release date: {releaseDate}</li>
           <li>{genre}</li>
         </ul>
-        <button>Learn more</button>
+        <Link to={`/${id}`}>
+          <button>Learn more</button>
+        </Link>
       </div>
     </div>
   );
