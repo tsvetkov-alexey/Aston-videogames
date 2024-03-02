@@ -1,5 +1,6 @@
 import logo from '../assets/img/logo.png';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const Header: React.FC = () => {
   return (
@@ -10,8 +11,12 @@ export const Header: React.FC = () => {
       </div>
       <div className="auth">
         <ul>
-          <li>Sign in</li>
-          <li>Sing up</li>
+          <Link to="/signIn">
+            <li>Sign in</li>
+          </Link>
+          <Link to="/signUp">
+            <li>Sing up</li>
+          </Link>
         </ul>
       </div>
     </header>
