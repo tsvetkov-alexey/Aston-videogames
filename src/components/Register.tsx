@@ -13,7 +13,6 @@ export const Register: React.FC = () => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        console.log(user);
         dispatch(
           setUser({
             email: user.email,
@@ -23,7 +22,7 @@ export const Register: React.FC = () => {
         );
         navigate('/');
       })
-      .catch(console.error);
+      .catch(() => alert('Something went wrong'));
   };
 
   return <Form title="register" handleClick={handleRegister} />;
