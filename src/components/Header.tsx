@@ -13,8 +13,12 @@ export const Header: React.FC = () => {
       </Link>
       <div className="auth">
         <ul>
-          <li>Sign in</li>
-          <li>Sing up</li>
+          <Link to="/signIn">
+            <li>Sign in</li>
+          </Link>
+          <Link to="/signUp">
+            <li>Sing up</li>
+          </Link>
         </ul>
       </div>
     </header>

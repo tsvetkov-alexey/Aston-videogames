@@ -1,4 +1,5 @@
 import App from './App.tsx';
+import './firebase.ts';
 import { store } from './redux/store.ts';
 import './scss/app.scss';
 import React from 'react';
