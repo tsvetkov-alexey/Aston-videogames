@@ -43,13 +43,28 @@ header {
   }
 
   .auth {
-    ul {
+    .loggedOut {
+      list-style-type: none;
+      display: flex;
+
+      li {
+        font-size: 16px;
+        &:first-child {
+          margin-right: 30px;
+        }
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .loggedIn {
       list-style-type: none;
       display: flex;
       li {
         font-size: 16px;
-        &:first-child {
-          margin-right: 20px;
+        &:nth-child(-n + 2) {
+          margin-right: 30px;
         }
         &:hover {
           cursor: pointer;
@@ -270,5 +285,19 @@ header {
 
   p {
     font-weight: 300;
+  }
+}
+
+.auth-form {
+  width: 80%;
+  margin: 80px 10%;
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    text-align: center;
+  }
+  .authTransition {
+    text-align: center;
   }
 }

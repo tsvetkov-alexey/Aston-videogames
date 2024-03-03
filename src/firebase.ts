@@ -9,7 +9,7 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_REACT_APP_FIREBASE_APP_ID,
 };
 
-let app: FirebaseApp | null = null; // Сделал так, поскольку иначе будет ошибка: 'app' is declared but its value is never read
+let app: FirebaseApp | null = null;
 
 if (!app) {
   app = initializeApp(firebaseConfig);

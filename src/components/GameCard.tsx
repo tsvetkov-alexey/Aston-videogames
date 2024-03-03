@@ -7,7 +7,7 @@ export const GameCard: React.FC<Game> = ({ id, title, imageUrl, releaseDate, gen
   return (
     <div className="card-block">
       <div className="main-image">
-        <img src={imageUrl} alt="tlou1" />
+        <img src={imageUrl} alt="game" />
         <div className="like">
           <img src={like} alt="like" />
         </div>

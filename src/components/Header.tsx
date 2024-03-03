@@ -1,8 +1,14 @@
 import logo from '../assets/img/logo.png';
+import { useAuth } from '../hooks/useAuth';
+import { useAppDispatch } from '../redux/store';
+import { removeUser } from '../redux/users/slice';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 export const Header: React.FC = () => {
+  const { isAuth } = useAuth();
+  const dispatch = useAppDispatch();
+
   return (
     <header>
       <Link to={'/'}>
@@ -12,14 +18,22 @@ export const Header: React.FC = () => {
         </div>
       </Link>
       <div className="auth">
-        <ul>
-          <Link to="/signIn">
-            <li>Sign in</li>
-          </Link>
-          <Link to="/signUp">
-            <li>Sing up</li>
-          </Link>
-        </ul>
+        {isAuth ? (
+          <ul className="loggedIn">
+            <li>History</li>
+            <li>Liked</li>
+            <li onClick={() => dispatch(removeUser())}>Log out</li>
+          </ul>
+        ) : (
+          <ul className="loggedOut">
+            <Link to="/signIn">
+              <li>Sign in</li>
+            </Link>
+            <Link to="/signUp">
+              <li>Sing up</li>
+            </Link>
+          </ul>
+        )}
       </div>
     </header>
   );
