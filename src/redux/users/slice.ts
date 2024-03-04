@@ -1,10 +1,11 @@
-import { userSliceState } from './types';
+import { favouriteGame, userSliceState } from './types';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState: userSliceState = {
   email: null,
   token: null,
   id: null,
+  likedGames: {},
 };
 
 export const userSlice = createSlice({
@@ -21,9 +22,18 @@ export const userSlice = createSlice({
       state.token = null;
       state.id = null;
     },
+    setLikedGame(state, action: PayloadAction<favouriteGame>) {
+      const { id } = action.payload;
+      if (id) {
+        state.likedGames[id] = action.payload;
+      }
+    },
+    removeLikedGame(state, action: PayloadAction<string>) {
+      delete state.likedGames[action.payload];
+    },
   },
 });
 
-export const { setUser, removeUser } = userSlice.actions;
+export const { setUser, removeUser, setLikedGame, removeLikedGame } = userSlice.actions;
 
 export default userSlice.reducer;

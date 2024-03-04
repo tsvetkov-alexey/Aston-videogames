@@ -7,14 +7,3 @@ export type Game = {
   description: string;
   ageRate: number;
 };
-
-export enum Status {
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error',
-}
-
-export interface GameSliceState {
-  items: Game[];
-  status: Status;
-}
