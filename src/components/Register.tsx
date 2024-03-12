@@ -28,6 +28,7 @@ export const Register: React.FC = () => {
             email: user.email,
             id: user.uid,
             token: user.refreshToken,
+            likedGames: {},
           }),
         );
         navigate('/');

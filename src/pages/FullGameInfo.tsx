@@ -1,31 +1,21 @@
 import like from '../assets/svg/like.svg';
 import { Header } from '../components/Header';
 import { Loader } from '../components/UI/Loader';
-import { Game } from '../redux/games/types';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { gameApi } from '../services/GameService';
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export const FullGameInfo: React.FC = () => {
-  const [gameInfo, setGameInfo] = useState<Game>();
-
   const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function getFullInfo() {
-      try {
-        const { data } = await axios.get(`https://81a99b1e3f23d819.mokky.dev/videogames?id=` + id);
-        setGameInfo(data[0]);
-        return data;
-      } catch (err) {
-        alert('Something went wrong, sorry :/');
-        navigate('/');
-      }
-    }
+  const { data: gameInfo, isError } = gameApi.useFetchGameByIdQuery(id || ''); // Возможно выглядит странно, но пока лучшее, что придумал. Иначе будет "...is not assignable to parameter of type 'string | unique symbol' "
 
-    getFullInfo();
-  }, []);
+  if (isError) {
+    alert('Something went wrong, sorry :/');
+    navigate('/');
+    return null;
+  }
 
   if (!gameInfo) {
     return <Loader />;

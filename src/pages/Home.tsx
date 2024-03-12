@@ -6,32 +6,31 @@ import { Pagination } from '../components/Pagination';
 import { Search } from '../components/Search';
 import { selectFilter } from '../redux/filter/selectors';
 import { setCurrentPage } from '../redux/filter/slice';
-import { fetchGames } from '../redux/games/asyncActions';
-import { selectGameData } from '../redux/games/selectors';
 import { useAppDispatch } from '../redux/store';
-import React, { useEffect } from 'react';
+import { gameApi } from '../services/GameService';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export const Home: React.FC = () => {
   const dispatch = useAppDispatch();
-
-  const { items, status } = useSelector(selectGameData);
-
   const { currentPage } = useSelector(selectFilter);
+
+  const [isLoading, setIsLoading] = useState(true); // Добавил локальный стейт isLoading, т.к без него isLoading из RTK Query не обновляется при смене страниц и нет плавности появления
+
+  const { data: games, isError } = gameApi.useFetchAllGamesQuery({ page: currentPage, limit: 4 });
+
   const onChangePage = (page: number) => {
+    setIsLoading(true);
     dispatch(setCurrentPage(page));
   };
 
   useEffect(() => {
-    const getGames = async () => {
-      await dispatch(fetchGames({ currentPage }));
-    };
-    getGames();
-  }, [dispatch, currentPage]);
+    if (games) {
+      setIsLoading(false);
+    }
+  }, [games]);
 
-  const games =
-    items && items.length > 0 ? items.map((obj) => <GameCard key={obj.id} {...obj} />) : null;
-
+  const items = Array.isArray(games) && games.map((obj) => <GameCard key={obj.id} {...obj} />);
   const skeletons = [...new Array(4)].map((_, index) => <GameCardSkeleton key={index} />);
 
   return (
@@ -39,9 +38,7 @@ export const Home: React.FC = () => {
       <Header></Header>
       <div className="main-block">
         <Search />
-        <div className="cards">
-          {status === 'error' ? <ErrorBlock /> : status === 'loading' ? skeletons : games}
-        </div>
+        <div className="cards">{isError ? <ErrorBlock /> : isLoading ? skeletons : items}</div>
       </div>
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </>
