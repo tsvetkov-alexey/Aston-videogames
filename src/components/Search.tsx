@@ -1,6 +1,5 @@
-import React from 'react';
-
 import searchIcon from '../assets/img/search-icon.png';
+import React from 'react';
 
 export const Search: React.FC = () => {
   return (
