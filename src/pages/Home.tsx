@@ -8,27 +8,26 @@ import { selectFilter } from '../redux/filter/selectors';
 import { setCurrentPage } from '../redux/filter/slice';
 import { useAppDispatch } from '../redux/store';
 import { gameApi } from '../services/GameService';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 export const Home: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { currentPage } = useSelector(selectFilter);
+  const { currentPage, searchValue } = useSelector(selectFilter);
 
-  const [isLoading, setIsLoading] = useState(true); // Добавил локальный стейт isLoading, т.к без него isLoading из RTK Query не обновляется при смене страниц и нет плавности появления
-
-  const { data: games, isError } = gameApi.useFetchAllGamesQuery({ page: currentPage, limit: 4 });
+  const {
+    data: games,
+    isError,
+    isFetching,
+  } = gameApi.useFetchAllGamesQuery({
+    page: currentPage,
+    limit: 4,
+    title: searchValue,
+  });
 
   const onChangePage = (page: number) => {
-    setIsLoading(true);
     dispatch(setCurrentPage(page));
   };
-
-  useEffect(() => {
-    if (games) {
-      setIsLoading(false);
-    }
-  }, [games]);
 
   const items = Array.isArray(games) && games.map((obj) => <GameCard key={obj.id} {...obj} />);
   const skeletons = [...new Array(4)].map((_, index) => <GameCardSkeleton key={index} />);
@@ -38,7 +37,7 @@ export const Home: React.FC = () => {
       <Header></Header>
       <div className="main-block">
         <Search />
-        <div className="cards">{isError ? <ErrorBlock /> : isLoading ? skeletons : items}</div>
+        <div className="cards">{isError ? <ErrorBlock /> : isFetching ? skeletons : items}</div>
       </div>
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </>
