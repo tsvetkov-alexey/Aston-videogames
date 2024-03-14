@@ -24,8 +24,6 @@ export const GameCard: React.FC<Game> = ({ id, title, imageUrl, releaseDate, gen
     }
   };
 
-  console.log(Object.values(likedGames));
-
   return (
     <div className="card-block">
       <div className="main-image">

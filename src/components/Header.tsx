@@ -1,5 +1,6 @@
 import logo from '../assets/img/logo.png';
 import { useAuth } from '../hooks/useAuth';
+import { setSearchValue } from '../redux/filter/slice';
 import { useAppDispatch } from '../redux/store';
 import { removeUser } from '../redux/users/slice';
 import React from 'react';
@@ -9,10 +10,14 @@ export const Header: React.FC = () => {
   const { isAuth } = useAuth();
   const dispatch = useAppDispatch();
 
+  const handleLogo = () => {
+    dispatch(setSearchValue(''));
+  };
+
   return (
     <header>
       <Link to={'/'}>
-        <div className="logo">
+        <div className="logo" onClick={handleLogo}>
           <img src={logo} alt="logo" />
           <h1>PlaySphere</h1>
         </div>
