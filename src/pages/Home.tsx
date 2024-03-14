@@ -37,6 +37,11 @@ export const Home: React.FC = () => {
       <Header></Header>
       <div className="main-block">
         <Search />
+        {searchValue ? (
+          <h3 className="search-results">
+            Search results for the query: <span>{searchValue}</span>
+          </h3>
+        ) : null}
         <div className="cards">{isError ? <ErrorBlock /> : isFetching ? skeletons : items}</div>
       </div>
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />

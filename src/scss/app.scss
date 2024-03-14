@@ -149,6 +149,16 @@ header {
     }
   }
 
+  .search-results {
+    text-align: center;
+    padding-top: 30px;
+    font-weight: 400;
+
+    span {
+      font-weight: 600;
+    }
+  }
+
   .cards {
     display: flex;
     justify-content: space-between;
@@ -166,6 +176,10 @@ header {
       width: 225%;
       text-align: center;
       padding: 100px 10px;
+
+      p {
+        padding: 10px 0;
+      }
     }
 
     .card-block {
