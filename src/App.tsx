@@ -1,3 +1,4 @@
+import { FavouriteGames } from './pages/FavouriteGames';
 import { FullGameInfo } from './pages/FullGameInfo';
 import { Home } from './pages/Home';
 import { SignIn } from './pages/SignIn';
@@ -11,6 +12,7 @@ function App() {
       <Route path="/:id" element={<FullGameInfo />}></Route>
       <Route path="/signIn" element={<SignIn />}></Route>
       <Route path="/signUp" element={<SignUp />}></Route>
+      <Route path="/favourite" element={<FavouriteGames />}></Route>
     </Routes>
   );
 }

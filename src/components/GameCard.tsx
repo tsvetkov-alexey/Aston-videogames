@@ -1,26 +1,60 @@
 import like from '../assets/svg/like.svg';
 import liked from '../assets/svg/liked.svg';
+import { useAuth } from '../hooks/useAuth';
+import {
+  addFavouriteGame,
+  fetchFavouriteGames,
+  removeFavouriteGame,
+  selectFavouriteGames,
+} from '../redux/favourite/slice';
 import { Game } from '../redux/games/types';
 import { useAppDispatch } from '../redux/store';
-import { selectUserData } from '../redux/users/selectors';
-import { removeLikedGame, setLikedGame } from '../redux/users/slice';
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-export const GameCard: React.FC<Game> = ({ id, title, imageUrl, releaseDate, genre }) => {
-  const [favourite, setFavourite] = useState(false);
+export const GameCard = ({ id: gameId, title, imageUrl, releaseDate, genre }: Game) => {
+  const [isProcessing, setIsProcessing] = useState(false);
+  const { id: userId, isAuth } = useAuth();
 
   const dispatch = useAppDispatch();
-  const { likedGames } = useSelector(selectUserData);
+  const favouriteGames = useSelector(selectFavouriteGames);
 
-  const handleLike = () => {
-    setFavourite(!favourite);
+  const isFavourite = favouriteGames.some((game) => game.gameId === gameId);
+  const [favourite, setFavourite] = useState(isFavourite);
 
-    if (!likedGames[id]) {
-      dispatch(setLikedGame({ id, title, imageUrl }));
+  useEffect(() => {
+    if (userId) {
+      dispatch(fetchFavouriteGames(userId));
+    }
+  }, []);
+
+  useEffect(() => {
+    const likeOnPage = favouriteGames.some((obj) => obj.gameId === gameId);
+    setFavourite(likeOnPage);
+  }, [favouriteGames]);
+
+  const toggleFavourite = () => {
+    if (isProcessing) {
+      return;
+    }
+
+    const updatedIsFavourite = !favourite;
+    setIsProcessing(true);
+
+    if (updatedIsFavourite && userId) {
+      dispatch(addFavouriteGame({ gameId, title, imageUrl, userId }))
+        .then(() => setFavourite(updatedIsFavourite))
+        .finally(() => {
+          setIsProcessing(false);
+        });
     } else {
-      dispatch(removeLikedGame(id.toString()));
+      userId &&
+        dispatch(removeFavouriteGame({ gameId, userId }))
+          .then(() => setFavourite(updatedIsFavourite))
+          .finally(() => {
+            setIsProcessing(false);
+          });
     }
   };
 
@@ -28,9 +62,11 @@ export const GameCard: React.FC<Game> = ({ id, title, imageUrl, releaseDate, gen
     <div className="card-block">
       <div className="main-image">
         <img src={imageUrl} alt="game" />
-        <div className="like" onClick={handleLike}>
-          {favourite ? <img src={liked} alt="like" /> : <img src={like} alt="like" />}
-        </div>
+        {isAuth && (
+          <div className="like" onClick={toggleFavourite}>
+            {favourite ? <img src={liked} alt="like" /> : <img src={like} alt="like" />}
+          </div>
+        )}
       </div>
       <div className="info">
         <h3>{title}</h3>
@@ -38,7 +74,7 @@ export const GameCard: React.FC<Game> = ({ id, title, imageUrl, releaseDate, gen
           <li>Release date: {releaseDate}</li>
           <li>{genre}</li>
         </ul>
-        <Link to={`/${id}`}>
+        <Link to={`/${gameId}`}>
           <button>Learn more</button>
         </Link>
       </div>

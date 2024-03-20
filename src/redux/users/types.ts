@@ -2,11 +2,10 @@ export interface userSliceState {
   email: string | null;
   token: string | null;
   id: string | null;
-  likedGames: Record<string, favouriteGame>;
 }
 
 export type favouriteGame = {
-  id: number;
+  id: string;
   title: string;
   imageUrl: string;
 };

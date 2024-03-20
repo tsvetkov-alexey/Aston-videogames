@@ -1,17 +1,24 @@
 import logo from '../assets/img/logo.png';
 import { useAuth } from '../hooks/useAuth';
+import { clearFavourite } from '../redux/favourite/slice';
 import { setSearchValue } from '../redux/filter/slice';
 import { useAppDispatch } from '../redux/store';
 import { removeUser } from '../redux/users/slice';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-export const Header: React.FC = () => {
+export const Header = () => {
   const { isAuth } = useAuth();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleLogo = () => {
     dispatch(setSearchValue(''));
+  };
+
+  const handleLogOut = () => {
+    dispatch(removeUser());
+    dispatch(clearFavourite());
+    navigate('/');
   };
 
   return (
@@ -26,8 +33,10 @@ export const Header: React.FC = () => {
         {isAuth ? (
           <ul className="loggedIn">
             <li>History</li>
-            <li>Liked</li>
-            <li onClick={() => dispatch(removeUser())}>Log out</li>
+            <Link to="/favourite">
+              <li>Liked</li>
+            </Link>
+            <li onClick={handleLogOut}>Log out</li>
           </ul>
         ) : (
           <ul className="loggedOut">
