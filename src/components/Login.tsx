@@ -1,14 +1,18 @@
+import { useAuth } from '../hooks/useAuth';
 import { LoginContext } from '../pages/SignIn';
+import { fetchFavouriteGames } from '../redux/favourite/slice';
 import { useAppDispatch } from '../redux/store';
 import { setUser } from '../redux/users/slice';
 import { Form } from './Form';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const Login: React.FC = () => {
+export const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const { id } = useAuth();
 
   let context = useContext(LoginContext);
 
@@ -28,13 +32,15 @@ export const Login: React.FC = () => {
             email: user.email,
             id: user.uid,
             token: user.refreshToken,
-            likedGames: {},
           }),
         );
         navigate('/');
       })
       .catch(() => alert('Invalid user'))
       .finally(() => setLoginLoading(false));
+    if (id) {
+      dispatch(fetchFavouriteGames(id));
+    }
   };
 
   return <Form title="sign in" handleClick={handleLogin} />;

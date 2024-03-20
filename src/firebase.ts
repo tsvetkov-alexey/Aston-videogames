@@ -1,4 +1,5 @@
 import { FirebaseApp, initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_REACT_APP_FIREBASE_API_KEY,
@@ -14,3 +15,5 @@ let app: FirebaseApp | null = null;
 if (!app) {
   app = initializeApp(firebaseConfig);
 }
+
+export const db = getFirestore();

@@ -2,11 +2,11 @@ import { RegistrationContext } from '../pages/SignUp';
 import { setUser } from '../redux/users/slice';
 import { Form } from './Form';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-export const Register: React.FC = () => {
+export const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,7 +28,6 @@ export const Register: React.FC = () => {
             email: user.email,
             id: user.uid,
             token: user.refreshToken,
-            likedGames: {},
           }),
         );
         navigate('/');

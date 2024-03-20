@@ -1,11 +1,12 @@
 import { gameApi } from '../services/GameService';
+import favourite from './favourite/slice';
 import filter from './filter/slice';
 import user from './users/slice';
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
 export const store = configureStore({
-  reducer: { filter, user, [gameApi.reducerPath]: gameApi.reducer },
+  reducer: { filter, user, favourite, [gameApi.reducerPath]: gameApi.reducer },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(gameApi.middleware),
 });
 
