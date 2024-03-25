@@ -1,4 +1,4 @@
-import { Game } from '../redux/games/types';
+import { Game } from '../redux/users/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const gameApi = createApi({

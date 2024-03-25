@@ -1,6 +1,7 @@
 import close from '../assets/img/close.png';
 import { useAuth } from '../hooks/useAuth';
-import { likedGame, removeFavouriteGame } from '../redux/favourite/slice';
+import { removeFavouriteGame } from '../redux/favourite/asyncActions';
+import { likedGame } from '../redux/favourite/slice';
 import { useAppDispatch } from '../redux/store';
 
 export const LikedGame = ({ gameId, title, imageUrl }: likedGame) => {

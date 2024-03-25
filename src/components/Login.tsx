@@ -1,6 +1,6 @@
 import { useAuth } from '../hooks/useAuth';
 import { LoginContext } from '../pages/SignIn';
-import { fetchFavouriteGames } from '../redux/favourite/slice';
+import { fetchFavouriteGames } from '../redux/favourite/asyncActions';
 import { useAppDispatch } from '../redux/store';
 import { setUser } from '../redux/users/slice';
 import { Form } from './Form';

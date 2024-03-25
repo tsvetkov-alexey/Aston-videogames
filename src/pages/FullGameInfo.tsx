@@ -1,5 +1,5 @@
 import { Header } from '../components/Header';
-import { Loader } from '../components/UI/Loader';
+import { PageLoader } from '../components/UI/PageLoader';
 import { gameApi } from '../services/GameService';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -17,7 +17,7 @@ export const FullGameInfo: React.FC = () => {
   }
 
   if (!gameInfo) {
-    return <Loader />;
+    return <PageLoader />;
   }
 
   return (

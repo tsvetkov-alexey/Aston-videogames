@@ -1,8 +1,7 @@
 import { Header } from '../../Header';
-import st from './loader.module.scss';
-import React from 'react';
+import st from './pageLoader.module.scss';
 
-export const Loader: React.FC = () => {
+export const PageLoader = () => {
   return (
     <>
       <Header />

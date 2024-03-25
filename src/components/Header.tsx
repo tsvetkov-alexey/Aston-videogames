@@ -32,7 +32,9 @@ export const Header = () => {
       <div className="auth">
         {isAuth ? (
           <ul className="loggedIn">
-            <li>History</li>
+            <Link to="/history">
+              <li>History</li>
+            </Link>
             <Link to="/favourite">
               <li>Liked</li>
             </Link>

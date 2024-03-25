@@ -16,7 +16,9 @@ export const FavouriteGames = () => {
     : null;
 
   const likedGames = sortedFavouriteGames
-    ? sortedFavouriteGames.map((obj) => <LikedGame key={obj.gameId} {...obj} />)
+    ? sortedFavouriteGames.map((obj, index) => (
+        <LikedGame key={`${obj.gameId}-${index}`} {...obj} />
+      ))
     : null;
 
   return (

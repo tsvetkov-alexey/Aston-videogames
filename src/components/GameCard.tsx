@@ -5,10 +5,11 @@ import {
   addFavouriteGame,
   fetchFavouriteGames,
   removeFavouriteGame,
-  selectFavouriteGames,
-} from '../redux/favourite/slice';
-import { Game } from '../redux/games/types';
+} from '../redux/favourite/asyncActions';
+import { selectFavouriteGames } from '../redux/favourite/slice';
 import { useAppDispatch } from '../redux/store';
+import { Game } from '../redux/users/types';
+import { LikeLoader } from './UI/LikeLoader';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -64,7 +65,13 @@ export const GameCard = ({ id: gameId, title, imageUrl, releaseDate, genre }: Ga
         <img src={imageUrl} alt="game" />
         {isAuth && (
           <div className="like" onClick={toggleFavourite}>
-            {favourite ? <img src={liked} alt="like" /> : <img src={like} alt="like" />}
+            {isProcessing ? (
+              <LikeLoader />
+            ) : favourite ? (
+              <img src={liked} alt="like" />
+            ) : (
+              <img src={like} alt="like" />
+            )}
           </div>
         )}
       </div>

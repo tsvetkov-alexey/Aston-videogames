@@ -1,6 +1,6 @@
 import { Header } from '../components/Header';
 import { Register } from '../components/Register';
-import { Loader } from '../components/UI/Loader';
+import { PageLoader } from '../components/UI/PageLoader';
 import React, { createContext, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -22,7 +22,7 @@ export const SignUp: React.FC = () => {
   return (
     <>
       {registrationLoading ? (
-        <Loader />
+        <PageLoader />
       ) : (
         <>
           <Header />

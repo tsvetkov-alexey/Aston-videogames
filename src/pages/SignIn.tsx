@@ -1,6 +1,6 @@
 import { Header } from '../components/Header';
 import { Login } from '../components/Login';
-import { Loader } from '../components/UI/Loader';
+import { PageLoader } from '../components/UI/PageLoader';
 import React, { createContext, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ export const SignIn: React.FC = () => {
   return (
     <>
       {loginLoading ? (
-        <Loader />
+        <PageLoader />
       ) : (
         <>
           <Header />
