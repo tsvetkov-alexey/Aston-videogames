@@ -7,6 +7,7 @@ import {
   removeFavouriteGame,
 } from '../redux/favourite/asyncActions';
 import { selectFavouriteGames } from '../redux/favourite/slice';
+import { fetchHistoryQuery } from '../redux/history/slice';
 import { useAppDispatch } from '../redux/store';
 import { Game } from '../redux/users/types';
 import { LikeLoader } from './UI/LikeLoader';
@@ -27,6 +28,7 @@ export const GameCard = ({ id: gameId, title, imageUrl, releaseDate, genre }: Ga
   useEffect(() => {
     if (userId) {
       dispatch(fetchFavouriteGames(userId));
+      dispatch(fetchHistoryQuery(userId));
     }
   }, []);
 

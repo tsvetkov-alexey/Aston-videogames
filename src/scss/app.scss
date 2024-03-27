@@ -416,7 +416,7 @@ header {
 }
 
 .history {
-  margin: 40px 10%;
+  margin: 40px 20%;
 
   h1 {
     text-align: center;
@@ -430,12 +430,34 @@ header {
       width: 100%;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       border: 0.5px solid rgb(200, 200, 200);
 
-      span {
-        text-align: center;
+      .wrapper {
         padding: 14px;
-        width: 25%;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+
+        span {
+          font-weight: 500;
+          font-size: 18px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+      img {
+        display: block;
+        margin: 0 auto;
+        max-width: 25px;
+        max-height: 25px;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }
