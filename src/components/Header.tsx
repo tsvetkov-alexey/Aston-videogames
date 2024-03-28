@@ -2,6 +2,7 @@ import logo from '../assets/img/logo.png';
 import { useAuth } from '../hooks/useAuth';
 import { clearFavourite } from '../redux/favourite/slice';
 import { setSearchValue } from '../redux/filter/slice';
+import { clearHistory } from '../redux/history/slice';
 import { useAppDispatch } from '../redux/store';
 import { removeUser } from '../redux/users/slice';
 import { Link, useNavigate } from 'react-router-dom';
@@ -18,6 +19,7 @@ export const Header = () => {
   const handleLogOut = () => {
     dispatch(removeUser());
     dispatch(clearFavourite());
+    dispatch(clearHistory());
     navigate('/');
   };
 

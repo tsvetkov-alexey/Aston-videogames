@@ -1,6 +1,8 @@
 import searchIcon from '../assets/img/search-icon.png';
+import { useAuth } from '../hooks/useAuth';
 import { selectFilter } from '../redux/filter/selectors';
 import { setSearchValue, setSuggestionTitle } from '../redux/filter/slice';
+import { addHistoryQuery } from '../redux/history/slice';
 import { useAppDispatch } from '../redux/store';
 import { gameApi } from '../services/GameService';
 import debounce from 'lodash.debounce';
@@ -11,6 +13,8 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom';
 export const Search: React.FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
+
+  const { id: userId } = useAuth();
 
   const { suggestionTitle } = useSelector(selectFilter);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -46,8 +50,13 @@ export const Search: React.FC = () => {
   const buttonHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch(setSearchValue(value));
+
     setSuggestionsVisible(false);
     setSearchParams({ title: value });
+
+    if (userId) {
+      dispatch(addHistoryQuery({ searchTitle: value, userId }));
+    }
   };
 
   const { data: title } = gameApi.useFetchGameTitleQuery(suggestionTitle);
