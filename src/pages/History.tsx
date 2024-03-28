@@ -1,10 +1,10 @@
 import { Header } from '../components/Header';
 import { SearchHistory } from '../components/SearchHistory';
-import { selectHistory } from '../redux/history/slice';
+import { selectAllHistories } from '../redux/history/slice';
 import { useSelector } from 'react-redux';
 
 export const History = () => {
-  const history = useSelector(selectHistory);
+  const history = useSelector(selectAllHistories);
 
   const sortedHistory = history
     ? history.concat().sort((a, b) => {

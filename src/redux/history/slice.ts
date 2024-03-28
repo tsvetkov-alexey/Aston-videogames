@@ -1,6 +1,6 @@
 import { db } from '../../firebase';
 import { RootState } from '../store';
-import { createSlice } from '@reduxjs/toolkit';
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   FirestoreDataConverter,
@@ -83,50 +83,41 @@ export const removeHistoryQuery = createAsyncThunk(
   },
 );
 
-interface HistoryState {
-  history: HistoryQueryParams[];
-}
+const historyAdapter = createEntityAdapter({
+  selectId: (history: HistoryQueryParams) => history.timestamp.seconds.toString(),
+  sortComparer: (a, b) => a.timestamp.seconds - b.timestamp.seconds,
+});
 
-const initialState: HistoryState = {
-  history: [],
-};
-
-const historyQuerySlice = createSlice({
-  name: 'historyQuery',
-  initialState,
+const historySearchSlice = createSlice({
+  name: 'historySearch',
+  initialState: historyAdapter.getInitialState(),
   reducers: {
-    clearHistory: (state) => {
-      state.history = [];
-    },
+    addHistory: historyAdapter.addOne,
+    removeHistory: historyAdapter.removeOne,
+    clearHistory: historyAdapter.removeAll,
   },
   extraReducers: (builder) => {
     builder.addCase(fetchHistoryQuery.fulfilled, (state, action) => {
-      state.history = action.payload;
+      historyAdapter.setAll(state, action.payload);
     });
     builder.addCase(addHistoryQuery.fulfilled, (state, action) => {
-      const payload = action.payload;
-      if (payload) {
-        const { timestamp } = payload;
-        state.history = state.history.filter(
-          (history) => history.timestamp?.seconds !== timestamp?.seconds,
-        );
-        state.history.push(action.payload);
-      }
+      historyAdapter.addOne(state, action.payload);
     });
     builder.addCase(removeHistoryQuery.fulfilled, (state, action) => {
       const payload = action.payload;
-      if (payload) {
-        const { timestamp } = payload;
-        state.history = state.history.filter(
-          (history) => history.timestamp?.seconds !== timestamp?.seconds,
-        );
+      if (payload && payload.timestamp !== undefined) {
+        historyAdapter.removeOne(state, payload.timestamp.seconds.toString());
       }
     });
   },
 });
 
-export const { clearHistory } = historyQuerySlice.actions;
+export const { clearHistory } = historySearchSlice.actions;
 
-export const selectHistory = (state: RootState) => state.historyQuery.history;
+export const {
+  selectAll: selectAllHistories,
+  selectById: selectHistoryById,
+  selectIds: selectHistoryIds,
+} = historyAdapter.getSelectors((state: RootState) => state.historySearch);
 
-export default historyQuerySlice.reducer;
+export default historySearchSlice.reducer;
