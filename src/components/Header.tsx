@@ -20,6 +20,7 @@ export const Header = () => {
     dispatch(removeUser());
     dispatch(clearFavourite());
     dispatch(clearHistory());
+    dispatch(setSearchValue(''));
     navigate('/');
   };
 

@@ -110,7 +110,7 @@ header {
     button {
       background: #203f7b;
       color: #fff;
-      font-size: 16px;
+      font-size: 1em;
       font-weight: 500;
       padding: 15px;
       border: 0;
@@ -363,6 +363,7 @@ header {
 
   h1 {
     text-align: center;
+    margin-bottom: 40px;
   }
 
   .fav-cards {
@@ -374,13 +375,13 @@ header {
     .card-position {
       position: relative;
       width: 31%;
+      padding-bottom: 50px;
 
       .card {
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
         border-radius: 30px;
         padding: 20px 10px;
         transition: all 500ms ease;
-        margin-top: 40px;
 
         &:hover {
           box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.25);
@@ -402,9 +403,9 @@ header {
       }
 
       .close {
-        top: 28px;
-        right: -7px;
-        width: 35px;
+        top: 0px;
+        right: 0px;
+        width: 30px;
         position: absolute;
 
         &:hover {
@@ -416,18 +417,19 @@ header {
 }
 
 .history {
-  margin: 40px 20%;
+  margin: 50px 10%;
 
   h1 {
     text-align: center;
   }
 
   &__info {
-    margin-top: 30px;
+    margin: 30px 10%;
     border: 0.5px solid rgb(200, 200, 200);
+    width: 70%;
 
     &__block {
-      width: 100%;
+      // position: relative;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -459,6 +461,40 @@ header {
           cursor: pointer;
         }
       }
+
+      .loaderPosition {
+        position: relative;
+        right: 168px;
+        bottom: 15px;
+      }
     }
+  }
+}
+
+.empty {
+  padding: 100px 0px;
+  width: 100%;
+
+  img {
+    max-width: 20%;
+    display: block;
+    margin: 0 auto;
+    animation: rotation 20s infinite linear;
+  }
+  h2 {
+    width: 40%;
+    text-align: center;
+    margin: 0 auto;
+    font-weight: 400;
+    padding: 15px 0;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

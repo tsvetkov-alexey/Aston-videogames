@@ -1,3 +1,4 @@
+import { Empty } from '../components/Empty';
 import { Header } from '../components/Header';
 import { SearchHistory } from '../components/SearchHistory';
 import { selectAllHistories } from '../redux/history/slice';
@@ -5,6 +6,8 @@ import { useSelector } from 'react-redux';
 
 export const History = () => {
   const history = useSelector(selectAllHistories);
+
+  // if (history.length === 0) return <Empty />;
 
   const sortedHistory = history
     ? history.concat().sort((a, b) => {
@@ -15,16 +18,19 @@ export const History = () => {
       })
     : null;
 
-  const historyInfo = sortedHistory
-    ? sortedHistory.map((obj, i) => <SearchHistory key={i} {...obj} />)
-    : 'Пока ничего нет';
+  const historyInfo =
+    sortedHistory && sortedHistory.map((obj, i) => <SearchHistory key={i} {...obj} />);
 
   return (
     <>
       <Header />
       <div className="history">
         <h1>Your search queries</h1>
-        <div className="history__info">{historyInfo}</div>
+        {history && history.length > 0 ? (
+          <div className="history__info">{historyInfo}</div>
+        ) : (
+          <Empty />
+        )}
       </div>
     </>
   );

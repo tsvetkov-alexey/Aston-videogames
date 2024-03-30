@@ -1,10 +1,9 @@
 import { Header } from '../components/Header';
 import { PageLoader } from '../components/UI/PageLoader';
 import { gameApi } from '../services/GameService';
-import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-export const FullGameInfo: React.FC = () => {
+export const FullGameInfo = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 

@@ -1,3 +1,4 @@
+import { Empty } from '../components/Empty';
 import { Header } from '../components/Header';
 import { LikedGame } from '../components/LikedGame';
 import { selectFavouriteGames } from '../redux/favourite/slice';
@@ -9,7 +10,7 @@ export const FavouriteGames = () => {
   const sortedFavouriteGames = favouriteGames
     ? favouriteGames.concat().sort((a, b) => {
         if (a.timestamp && b.timestamp) {
-          return b.timestamp.seconds - a.timestamp.seconds;
+          return a.timestamp.seconds - b.timestamp.seconds;
         }
         return 0;
       })
@@ -27,7 +28,7 @@ export const FavouriteGames = () => {
       <div className="favourite-block">
         <h1>Here is what you liked</h1>
         <div className="fav-cards">
-          {likedGames && likedGames.length > 0 ? likedGames : 'Ничего нет'}
+          {likedGames && likedGames.length > 0 ? likedGames : <Empty />}
         </div>
       </div>
     </>

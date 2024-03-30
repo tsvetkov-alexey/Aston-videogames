@@ -3,11 +3,14 @@ import { useAuth } from '../hooks/useAuth';
 import { setSearchValue } from '../redux/filter/slice';
 import { HistoryQueryParams, removeHistoryQuery } from '../redux/history/slice';
 import { useAppDispatch } from '../redux/store';
+import { MiniLoader } from './UI/MiniLoader';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export const SearchHistory = ({ searchTitle, timestamp }: HistoryQueryParams) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const location = useLocation();
   const { id: userId } = useAuth();
@@ -20,8 +23,11 @@ export const SearchHistory = ({ searchTitle, timestamp }: HistoryQueryParams) =>
   };
 
   const removeHandler = () => {
+    setIsProcessing(true);
     if (userId) {
-      dispatch(removeHistoryQuery({ searchTitle, userId, timestamp }));
+      dispatch(removeHistoryQuery({ searchTitle, userId, timestamp }))
+        .then(() => setIsProcessing(false))
+        .catch((error) => alert(`Error occurred while removing game: ${error}`));
     }
   };
 
@@ -30,7 +36,14 @@ export const SearchHistory = ({ searchTitle, timestamp }: HistoryQueryParams) =>
       <div className="wrapper">
         <span onClick={titleHandler}>{searchTitle}</span>
       </div>
-      <img src={close} alt="close" className="close" onClick={removeHandler} />
+
+      {isProcessing ? (
+        <div className="loaderPosition">
+          <MiniLoader />
+        </div>
+      ) : (
+        <img src={close} alt="close" className="close" onClick={removeHandler} />
+      )}
     </div>
   );
 };

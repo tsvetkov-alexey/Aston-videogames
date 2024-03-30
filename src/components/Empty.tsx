@@ -1,7 +1,6 @@
 import tumbleWeed from '../assets/img/tumbleweed.png';
-import React from 'react';
 
-export const Empty: React.FC = () => {
+export const Empty = () => {
   return (
     <div className="empty">
       <img src={tumbleWeed} alt="tumbleweed" />

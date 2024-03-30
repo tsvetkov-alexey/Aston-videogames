@@ -1,6 +1,7 @@
 import { useAuth } from '../hooks/useAuth';
 import { LoginContext } from '../pages/SignIn';
-import { fetchFavouriteGames } from '../redux/favourite/asyncActions';
+import { fetchFavouriteGames } from '../redux/favourite/slice';
+import { setSearchValue } from '../redux/filter/slice';
 import { useAppDispatch } from '../redux/store';
 import { setUser } from '../redux/users/slice';
 import { Form } from './Form';
@@ -35,6 +36,7 @@ export const Login = () => {
           }),
         );
         navigate('/');
+        dispatch(setSearchValue(''));
       })
       .catch(() => alert('Invalid user'))
       .finally(() => setLoginLoading(false));
