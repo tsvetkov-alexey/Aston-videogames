@@ -5,9 +5,22 @@ import ReactPaginate from 'react-paginate';
 type PaginationProps = {
   currentPage: number;
   onChangePage: (page: number) => void;
+  totalGames: number;
+  pageSize: number;
 };
 
-export const Pagination: React.FC<PaginationProps> = ({ currentPage, onChangePage }) => {
+export const Pagination: React.FC<PaginationProps> = ({
+  currentPage,
+  onChangePage,
+  totalGames,
+  pageSize,
+}) => {
+  const totalPages = Math.ceil(totalGames / pageSize);
+
+  if (totalPages <= 1) {
+    return null;
+  }
+
   return (
     <ReactPaginate
       className={st.root}
@@ -16,7 +29,7 @@ export const Pagination: React.FC<PaginationProps> = ({ currentPage, onChangePag
       previousLabel="<"
       onPageChange={(e) => onChangePage(e.selected + 1)}
       pageRangeDisplayed={6}
-      pageCount={5}
+      pageCount={totalPages}
       forcePage={currentPage - 1}
     />
   );

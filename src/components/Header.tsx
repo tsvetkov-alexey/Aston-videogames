@@ -1,7 +1,7 @@
 import logo from '../assets/img/logo.png';
 import { useAuth } from '../hooks/useAuth';
 import { clearFavourite } from '../redux/favourite/slice';
-import { setSearchValue } from '../redux/filter/slice';
+import { setCurrentPage, setSearchValue } from '../redux/filter/slice';
 import { clearHistory } from '../redux/history/slice';
 import { useAppDispatch } from '../redux/store';
 import { removeUser } from '../redux/users/slice';
@@ -14,6 +14,7 @@ export const Header = () => {
 
   const handleLogo = () => {
     dispatch(setSearchValue(''));
+    dispatch(setCurrentPage(1));
   };
 
   const handleLogOut = () => {

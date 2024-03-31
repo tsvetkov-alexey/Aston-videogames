@@ -1,7 +1,7 @@
 import searchIcon from '../assets/img/search-icon.png';
 import { useAuth } from '../hooks/useAuth';
 import { selectFilter } from '../redux/filter/selectors';
-import { setSearchValue, setSuggestionTitle } from '../redux/filter/slice';
+import { setSearchValue, setSuggestionTitle, setTotalGames } from '../redux/filter/slice';
 import { addHistoryQuery } from '../redux/history/slice';
 import { useAppDispatch } from '../redux/store';
 import { gameApi } from '../services/GameService';
@@ -10,13 +10,13 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
-export const Search: React.FC = () => {
+export const Search = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
 
   const { id: userId } = useAuth();
 
-  const { suggestionTitle } = useSelector(selectFilter);
+  const { suggestionTitle, searchValue } = useSelector(selectFilter);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const inputRef = useRef(null);
@@ -60,6 +60,15 @@ export const Search: React.FC = () => {
   };
 
   const { data: title } = gameApi.useFetchGameTitleQuery(suggestionTitle);
+
+  useEffect(() => {
+    if (Array.isArray(title) && title) {
+      dispatch(setTotalGames(title.length));
+    }
+    if (searchValue === '') {
+      dispatch(setSuggestionTitle(''));
+    }
+  }, [title, searchValue]);
 
   return (
     <form className="search">

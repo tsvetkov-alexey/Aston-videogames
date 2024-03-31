@@ -2,6 +2,7 @@ import { filterSliceState } from './types';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState: filterSliceState = {
+  totalGames: 0,
   currentPage: 1,
   searchValue: '',
   suggestionTitle: '',
@@ -20,9 +21,13 @@ const filterSlice = createSlice({
     setSuggestionTitle(state, action: PayloadAction<string>) {
       state.suggestionTitle = action.payload;
     },
+    setTotalGames(state, action: PayloadAction<number>) {
+      state.totalGames = action.payload;
+    },
   },
 });
 
-export const { setCurrentPage, setSearchValue, setSuggestionTitle } = filterSlice.actions;
+export const { setCurrentPage, setSearchValue, setSuggestionTitle, setTotalGames } =
+  filterSlice.actions;
 
 export default filterSlice.reducer;
