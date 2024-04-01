@@ -1,5 +1,4 @@
 import { Empty } from '../components/Empty';
-import { Header } from '../components/Header';
 import { LikedGame } from '../components/LikedGame';
 import { selectFavouriteGames } from '../redux/favourite/slice';
 import { useSelector } from 'react-redux';
@@ -24,7 +23,6 @@ export const FavouriteGames = () => {
 
   return (
     <>
-      <Header />
       <div className="favourite-block">
         <h1>Here is what you liked</h1>
         <div className="fav-cards">

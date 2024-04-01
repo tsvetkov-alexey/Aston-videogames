@@ -1,4 +1,3 @@
-import { Header } from '../components/Header';
 import { Login } from '../components/Login';
 import { PageLoader } from '../components/UI/PageLoader';
 import React, { createContext, useMemo, useState } from 'react';
@@ -22,7 +21,6 @@ export const SignIn: React.FC = () => {
         <PageLoader />
       ) : (
         <>
-          <Header />
           <div className="auth-form">
             <h1>Login</h1>
             <LoginContext.Provider value={contextValues}>

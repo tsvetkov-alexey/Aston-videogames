@@ -1,18 +1,18 @@
-import { Header } from '../components/Header';
 import { LikeButton } from '../components/LikeButton';
 import { PageLoader } from '../components/UI/PageLoader';
+import { useAuth } from '../hooks/useAuth';
 import { gameApi } from '../services/GameService';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export const FullGameInfo = () => {
   const { id } = useParams();
+  const { isAuth } = useAuth();
   const navigate = useNavigate();
 
   const { data: gameInfo, isError } = gameApi.useFetchGameByIdQuery(id || '');
 
   if (isError) {
-    alert('Something went wrong, sorry :/');
-    navigate('/');
+    navigate('/NotFound');
     return null;
   }
 
@@ -22,12 +22,17 @@ export const FullGameInfo = () => {
 
   return (
     <>
-      <Header />
       <div className="full-info">
         <div className="front-block">
           <div className="image">
             <img src={gameInfo.imageUrl} alt="game" className="main-picture" />
-            <LikeButton gameId={gameInfo.id} title={gameInfo.title} imageUrl={gameInfo.imageUrl} />
+            {isAuth ? (
+              <LikeButton
+                gameId={gameInfo.id}
+                title={gameInfo.title}
+                imageUrl={gameInfo.imageUrl}
+              />
+            ) : null}
           </div>
           <div className="game-info">
             <h2>{gameInfo.title}</h2>

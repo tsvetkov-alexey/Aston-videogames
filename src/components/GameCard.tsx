@@ -30,7 +30,7 @@ export const GameCard = ({ id: gameId, title, imageUrl, releaseDate, genre }: Ga
           <li>Release date: {releaseDate}</li>
           <li>{genre}</li>
         </ul>
-        <Link to={`/${gameId}`}>
+        <Link to={`game/${gameId}`}>
           <button>Learn more</button>
         </Link>
       </div>

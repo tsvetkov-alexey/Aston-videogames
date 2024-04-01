@@ -1,13 +1,13 @@
 import { ErrorBlock } from '../components/ErrorBlock';
 import { GameCard } from '../components/GameCard';
 import { GameCardSkeleton } from '../components/GameCardSkeleton';
-import { Header } from '../components/Header';
 import { Pagination } from '../components/Pagination';
 import { Search } from '../components/Search';
 import { selectFilter } from '../redux/filter/selectors';
-import { setCurrentPage } from '../redux/filter/slice';
+import { setCurrentPage, setTotalGames } from '../redux/filter/slice';
 import { useAppDispatch } from '../redux/store';
 import { gameApi } from '../services/GameService';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 export const Home = () => {
@@ -25,6 +25,14 @@ export const Home = () => {
     title: searchValue,
   });
 
+  const { data: gamesCount } = gameApi.useFetchGameTitleQuery(searchValue);
+
+  useEffect(() => {
+    if (Array.isArray(gamesCount) && gamesCount) {
+      dispatch(setTotalGames(gamesCount.length));
+    }
+  }, [gamesCount, searchValue]);
+
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -35,7 +43,6 @@ export const Home = () => {
 
   return (
     <>
-      <Header />
       <div className="main-block">
         <Search />
         {searchValue ? (

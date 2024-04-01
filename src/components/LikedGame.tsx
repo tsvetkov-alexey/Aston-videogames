@@ -24,7 +24,7 @@ export const LikedGame = ({ gameId, title, imageUrl }: likedGame) => {
   return (
     <div className="card-position">
       <div className="card">
-        <Link to={`/${gameId}`}>
+        <Link to={`/game/${gameId}`}>
           <img src={imageUrl} alt="game" />
         </Link>
         <h3> {title} </h3>

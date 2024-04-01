@@ -1,4 +1,3 @@
-import { Header } from '../components/Header';
 import { Register } from '../components/Register';
 import { PageLoader } from '../components/UI/PageLoader';
 import React, { createContext, useMemo, useState } from 'react';
@@ -25,10 +24,8 @@ export const SignUp: React.FC = () => {
         <PageLoader />
       ) : (
         <>
-          <Header />
           <div className="auth-form">
             <h1>Registration</h1>
-            {/* Pass the memoized context values */}
             <RegistrationContext.Provider value={contextValues}>
               <Register />
             </RegistrationContext.Provider>
