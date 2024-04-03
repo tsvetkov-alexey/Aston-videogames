@@ -21,7 +21,6 @@ export const SearchHistory = ({ searchTitle, timestamp }: HistoryQueryParams) =>
     navigate({ pathname: '/', search: params.toString() });
     dispatch(setSearchValue(searchTitle));
   };
-
   const removeHandler = () => {
     setIsProcessing(true);
     if (userId) {

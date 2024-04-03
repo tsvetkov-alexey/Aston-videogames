@@ -1,10 +1,12 @@
-import { NotFoundBlock } from '../components/NotFound';
-import { FavouriteGames } from '../pages/FavouriteGames';
-import { FullGameInfo } from '../pages/FullGameInfo';
-import { History } from '../pages/History';
-import { Home } from '../pages/Home';
-import { SignIn } from '../pages/SignIn';
-import { SignUp } from '../pages/SignUp';
+import { lazily } from 'react-lazily';
+
+const { Home } = lazily(() => import('../pages/Home'));
+const { FullGameInfo } = lazily(() => import('../pages/FullGameInfo'));
+const { NotFoundBlock } = lazily(() => import('../components/NotFound'));
+const { SignIn } = lazily(() => import('../pages/SignIn'));
+const { SignUp } = lazily(() => import('../pages/SignUp'));
+const { History } = lazily(() => import('../pages/History'));
+const { FavouriteGames } = lazily(() => import('../pages/FavouriteGames'));
 
 export const publicRoutes = [
   { path: '', component: Home },

@@ -8,7 +8,7 @@ import { removeUser } from '../redux/users/slice';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const Header = () => {
-  const { isAuth } = useAuth();
+  const { isAuth, signOut } = useAuth();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -22,6 +22,7 @@ export const Header = () => {
     dispatch(clearFavourite());
     dispatch(clearHistory());
     dispatch(setSearchValue(''));
+    signOut();
     navigate('/');
   };
 

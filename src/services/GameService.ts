@@ -22,7 +22,7 @@ export const gameApi = createApi({
     }),
     fetchGameTitle: build.query<Game, string>({
       query: (title) => ({
-        url: `games/?title=${title}`,
+        url: `games/?title=${encodeURIComponent(title)}`,
       }),
     }),
   }),
