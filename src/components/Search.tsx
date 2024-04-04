@@ -19,7 +19,9 @@ export const Search = () => {
   const { suggestionTitle } = useSelector(selectFilter);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   const [value, setValue] = useState('');
   const [suggestionsVisible, setSuggestionsVisible] = useState(false);
 
@@ -62,6 +64,28 @@ export const Search = () => {
 
   const { data: title } = gameApi.useFetchGameTitleQuery(suggestionTitle);
 
+  const onBlurInput = useCallback(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        e.target instanceof Node &&
+        !dropdownRef.current.contains(e.target) &&
+        inputRef.current &&
+        !inputRef.current.contains(e.target)
+      ) {
+        setSuggestionsVisible(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    onBlurInput();
+  }, [dropdownRef]);
+
   return (
     <form className="search">
       <input
@@ -71,13 +95,14 @@ export const Search = () => {
         value={value}
         onChange={onChangeInput}
         onFocus={() => setSuggestionsVisible(true)}
-        onBlur={() => setSuggestionsVisible(false)}
+        onBlur={onBlurInput}
       />
       <img src={searchIcon} alt="searchIcon" />
       <button onClick={buttonHandler}>Search</button>
       <div
         className="dropdown-block"
-        style={{ display: value && suggestionsVisible ? 'block' : 'none' }}>
+        style={{ display: value && suggestionsVisible ? 'block' : 'none' }}
+        ref={dropdownRef}>
         {value &&
           suggestionsVisible &&
           title &&
