@@ -7,7 +7,7 @@ export const usePasswordValidation = () => {
   const handlePasswordChange = (value: string) => {
     setPassword(value);
 
-    if (password.length <= 4) {
+    if (value.length < 6) {
       setPasswordError('The length of your password must be 6 or even more symbols');
     } else {
       setPasswordError('');

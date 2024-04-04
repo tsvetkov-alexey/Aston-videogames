@@ -33,6 +33,7 @@ export const Search = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const titleParam = params.get('title');
+
     if (titleParam) {
       setValue(titleParam);
       dispatch(setSearchValue(titleParam));
@@ -69,6 +70,8 @@ export const Search = () => {
         ref={inputRef}
         value={value}
         onChange={onChangeInput}
+        onFocus={() => setSuggestionsVisible(true)}
+        onBlur={() => setSuggestionsVisible(false)}
       />
       <img src={searchIcon} alt="searchIcon" />
       <button onClick={buttonHandler}>Search</button>
@@ -80,7 +83,7 @@ export const Search = () => {
           title &&
           Array.isArray(title) &&
           title.slice(0, 7).map((item) => (
-            <Link to={`/${item.id}`} key={item.id}>
+            <Link to={`/game/${item.id}`} key={item.id}>
               <p>{item.title}</p>
             </Link>
           ))}

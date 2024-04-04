@@ -1,4 +1,4 @@
-import { Game } from '../redux/users/types';
+import { Game, suggestedGame } from '../redux/users/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const gameApi = createApi({
@@ -20,10 +20,15 @@ export const gameApi = createApi({
         url: `games/${id}`,
       }),
     }),
-    fetchGameTitle: build.query<Game, string>({
+    fetchGameTitle: build.query<suggestedGame[], string>({
       query: (title) => ({
         url: `games/?title=${encodeURIComponent(title)}`,
       }),
+      transformResponse: (response: suggestedGame[]) =>
+        response.map((game) => ({
+          id: game.id,
+          title: game.title,
+        })),
     }),
   }),
 });

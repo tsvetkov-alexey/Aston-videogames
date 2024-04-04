@@ -20,6 +20,11 @@ export type favouriteGame = {
   imageUrl: string;
 };
 
+export type suggestedGame = {
+  id: string;
+  title: string;
+};
+
 export interface FormProps {
   title: string;
   handleClick: (email: string, password: string) => void;

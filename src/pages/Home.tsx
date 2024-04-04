@@ -1,4 +1,4 @@
-import { ErrorBlock } from '../components/ErrorBlock';
+import { Empty } from '../components/Empty';
 import { GameCard } from '../components/GameCard';
 import { GameCardSkeleton } from '../components/GameCardSkeleton';
 import { Pagination } from '../components/Pagination';
@@ -50,12 +50,12 @@ export const Home = () => {
             Search results for the query: <span>{searchValue}</span>
           </h3>
         ) : null}
-        <div className="cards">{isError ? <ErrorBlock /> : isFetching ? skeletons : items}</div>
+        <div className="cards">{isError ? <Empty /> : isFetching ? skeletons : items}</div>
       </div>
       <Pagination
         currentPage={currentPage}
         onChangePage={onChangePage}
-        totalGames={totalGames}
+        totalGames={!isError ? totalGames : 0}
         pageSize={4}
       />
     </>
