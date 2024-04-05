@@ -1,6 +1,5 @@
 import { useAppDispatch } from '../redux/store';
-import { selectUserData } from '../redux/users/selectors';
-import { removeUser, setUser } from '../redux/users/slice';
+import { removeUser, selectUserData, setUser } from '../redux/users/slice';
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';

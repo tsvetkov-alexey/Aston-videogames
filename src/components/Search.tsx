@@ -1,7 +1,6 @@
 import searchIcon from '../assets/img/search-icon.png';
 import { useAuth } from '../hooks/useAuth';
-import { selectFilter } from '../redux/filter/selectors';
-import { setSearchValue, setSuggestionTitle } from '../redux/filter/slice';
+import { selectFilter, setSearchValue, setSuggestionTitle } from '../redux/filter/slice';
 import { addHistoryQuery } from '../redux/history/slice';
 import { useAppDispatch } from '../redux/store';
 import { gameApi } from '../services/GameService';

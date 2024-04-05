@@ -3,8 +3,7 @@ import { GameCard } from '../components/GameCard';
 import { GameCardSkeleton } from '../components/GameCardSkeleton';
 import { Pagination } from '../components/Pagination';
 import { Search } from '../components/Search';
-import { selectFilter } from '../redux/filter/selectors';
-import { setCurrentPage, setTotalGames } from '../redux/filter/slice';
+import { selectFilter, setCurrentPage, setTotalGames } from '../redux/filter/slice';
 import { useAppDispatch } from '../redux/store';
 import { gameApi } from '../services/GameService';
 import { useEffect } from 'react';
@@ -12,8 +11,7 @@ import { useSelector } from 'react-redux';
 
 export const Home = () => {
   const dispatch = useAppDispatch();
-  const { currentPage, searchValue } = useSelector(selectFilter);
-  const { totalGames } = useSelector(selectFilter);
+  const { currentPage, searchValue, totalGames } = useSelector(selectFilter);
 
   const {
     data: games,

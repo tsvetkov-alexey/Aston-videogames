@@ -1,5 +1,12 @@
-import { filterSliceState } from './types';
+import { RootState } from '../store';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
+interface filterSliceState {
+  totalGames: number;
+  currentPage: number;
+  searchValue: string;
+  suggestionTitle: string;
+}
 
 const initialState: filterSliceState = {
   totalGames: 0,
@@ -29,5 +36,7 @@ const filterSlice = createSlice({
 
 export const { setCurrentPage, setSearchValue, setSuggestionTitle, setTotalGames } =
   filterSlice.actions;
+
+export const selectFilter = (state: RootState) => state.filter;
 
 export default filterSlice.reducer;
