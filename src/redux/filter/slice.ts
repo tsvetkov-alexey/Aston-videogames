@@ -6,6 +6,8 @@ interface filterSliceState {
   currentPage: number;
   searchValue: string;
   suggestionTitle: string;
+  loginLoading: boolean;
+  registrationLoading: boolean;
 }
 
 const initialState: filterSliceState = {
@@ -13,6 +15,8 @@ const initialState: filterSliceState = {
   currentPage: 1,
   searchValue: '',
   suggestionTitle: '',
+  loginLoading: false,
+  registrationLoading: false,
 };
 
 const filterSlice = createSlice({
@@ -31,11 +35,23 @@ const filterSlice = createSlice({
     setTotalGames(state, action: PayloadAction<number>) {
       state.totalGames = action.payload;
     },
+    setLoginLoading(state, action: PayloadAction<boolean>) {
+      state.loginLoading = action.payload;
+    },
+    setRegistrationLoading(state, action: PayloadAction<boolean>) {
+      state.registrationLoading = action.payload;
+    },
   },
 });
 
-export const { setCurrentPage, setSearchValue, setSuggestionTitle, setTotalGames } =
-  filterSlice.actions;
+export const {
+  setCurrentPage,
+  setSearchValue,
+  setSuggestionTitle,
+  setTotalGames,
+  setLoginLoading,
+  setRegistrationLoading,
+} = filterSlice.actions;
 
 export const selectFilter = (state: RootState) => state.filter;
 
