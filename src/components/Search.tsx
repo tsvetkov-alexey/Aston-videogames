@@ -63,6 +63,10 @@ export const Search = () => {
 
   const { data: title } = gameApi.useFetchGameTitleQuery(suggestionTitle);
 
+// Блок кода с onBlurInput мне не очень нравится, но других мыслей как реализовать
+// функционал: скрытие саджестов при клике вне блока dropdown-block или input, при этом чтобы
+// при нажатии на саджест переходило по ссылке, а блок не скрывался, мне не пришло
+
   const onBlurInput = useCallback(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
