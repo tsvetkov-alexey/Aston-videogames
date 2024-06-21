@@ -75,3 +75,11 @@
     box-shadow: 0.6em -0.6em 0 0 currentcolor;
   }
 }
+
+// 780 PX
+@media (max-width: 780px) {
+  .loader {
+    width: 18vw;
+    height: 14vh;
+  }
+}

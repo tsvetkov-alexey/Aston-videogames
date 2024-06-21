@@ -376,7 +376,7 @@ header {
 
     .card-position {
       position: relative;
-      width: 31%;
+      width: 47%;
       padding-bottom: 50px;
 
       .card {
@@ -431,7 +431,6 @@ header {
     width: 70%;
 
     &__block {
-      // position: relative;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -466,7 +465,7 @@ header {
 
       .loaderPosition {
         position: relative;
-        right: 168px;
+        right: 178px;
         bottom: 15px;
       }
     }
@@ -520,5 +519,292 @@ header {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+///////// 480 PX
+
+@media (max-width: 480px) {
+  header {
+    a {
+      .logo {
+        img {
+          max-width: 26px;
+        }
+        h1 {
+          margin-left: 10px;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .auth {
+      .loggedOut {
+        li {
+          font-size: 12px;
+          &:first-child {
+            margin-right: 16px;
+          }
+        }
+      }
+
+      .loggedIn {
+        li {
+          font-size: 12px;
+          &:nth-child(-n + 2) {
+            margin-right: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  .main-block {
+    .search {
+      button {
+        display: none;
+      }
+
+      .dropdown-block {
+        width: 97%;
+      }
+    }
+
+    .cards {
+      .card-block {
+        width: 90%;
+
+        .main-image {
+          position: relative;
+
+          .like {
+            right: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  .full-info {
+    width: 80%;
+    margin: 5% 5%;
+    padding: 7.5% 5%;
+
+    .front-block {
+      flex-direction: column;
+
+      .image {
+        position: relative;
+        width: 100%;
+
+        .like {
+          top: 10px;
+        }
+      }
+
+      .game-info {
+        width: 70%;
+      }
+    }
+  }
+
+  .auth-form {
+    width: 90%;
+    margin: 150px 5%;
+
+    div {
+      width: 100%;
+    }
+  }
+
+  .favourite-block {
+    margin: 50px 5%;
+
+    .fav-cards {
+      flex-direction: column;
+
+      .card-position {
+        width: 100%;
+        .card {
+          img {
+            max-width: 90%;
+          }
+        }
+      }
+    }
+  }
+
+  .history {
+    h1 {
+      text-align: center;
+    }
+
+    &__info {
+      margin: 30px 5%;
+      width: 90%;
+
+      &__block {
+        .loaderPosition {
+          position: relative;
+          right: 47px;
+          bottom: 15px;
+        }
+      }
+    }
+  }
+
+  .empty {
+    width: 100%;
+
+    img {
+      max-width: 80%;
+    }
+    h2 {
+      width: 100%;
+    }
+  }
+}
+
+//////// 660 PX
+
+@media screen and (min-width: 480px) and (max-width: 660px) {
+  header {
+    a {
+      .logo {
+        img {
+          max-width: 42px;
+        }
+        h1 {
+          margin-left: 10px;
+          font-size: 28px;
+        }
+      }
+    }
+
+    .auth {
+      .loggedOut {
+        li {
+          font-size: 12px;
+          &:first-child {
+            margin-right: 16px;
+          }
+        }
+      }
+
+      .loggedIn {
+        li {
+          font-size: 14px;
+          &:nth-child(-n + 2) {
+            margin-right: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  .main-block {
+    .search {
+      button {
+        display: none;
+      }
+
+      .dropdown-block {
+        width: 90%;
+      }
+    }
+
+    .cards {
+      .card-block {
+        width: 90%;
+
+        .main-image {
+          position: relative;
+
+          .like {
+            right: 36px;
+          }
+        }
+      }
+    }
+  }
+
+  .full-info {
+    width: 80%;
+    margin: 5% 5%;
+    padding: 7.5% 5%;
+
+    .front-block {
+      flex-direction: column;
+
+      .image {
+        position: relative;
+        width: 100%;
+
+        .like {
+          top: 10px;
+        }
+      }
+
+      .game-info {
+        width: 70%;
+      }
+    }
+  }
+
+  .auth-form {
+    width: 90%;
+    margin: 150px 5%;
+
+    div {
+      width: 100%;
+    }
+  }
+
+  .favourite-block {
+    margin: 50px 5%;
+
+    .fav-cards {
+      flex-direction: column;
+
+      .card-position {
+        width: 100%;
+        .card {
+          img {
+            max-width: 90%;
+          }
+        }
+      }
+    }
+  }
+
+  .history {
+    h1 {
+      text-align: center;
+    }
+
+    &__info {
+      margin: 30px 5%;
+      width: 90%;
+
+      &__block {
+        .loaderPosition {
+          position: relative;
+          right: 81px;
+          bottom: 15px;
+        }
+      }
+    }
+  }
+
+  .empty {
+    width: 70%;
+    margin: 0 15%;
+
+    img {
+      max-width: 70%;
+    }
+    h2 {
+      margin: 20px auto;
+    }
   }
 }
